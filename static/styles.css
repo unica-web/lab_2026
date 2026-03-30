@@ -1,0 +1,333 @@
+:root {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --text: #0f172a;
+  --text-light: #334155;
+  --muted: #64748b;
+  --primary: #1e40af;
+  --primary-strong: #1e3a8a;
+  --primary-light: #dbeafe;
+  --accent: #0ea5e9;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 4px 16px rgba(15,23,42,0.08), 0 1px 4px rgba(15,23,42,0.04);
+  --shadow-lg: 0 12px 40px rgba(15,23,42,0.10);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+header {
+  background: linear-gradient(135deg, var(--primary-strong) 0%, var(--primary) 60%, var(--accent) 100%);
+  padding: 2.75rem 1.5rem 2.25rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM36 6V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+header p {
+  margin: 0.6rem 0 0;
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  position: relative;
+}
+
+/* ── Navigation ── */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  transition: all 0.18s ease;
+  letter-spacing: 0.1px;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background: var(--primary-light);
+  border-color: #bfdbfe;
+  color: var(--primary);
+  outline: none;
+}
+
+/* ── Main container ── */
+.container {
+  width: min(1000px, 92%);
+  margin: 2.5rem auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  flex: 1;
+}
+
+.container h3 {
+  margin: 0 0 1.5rem;
+  color: var(--primary-strong);
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  padding-bottom: 0.9rem;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: block;
+  margin: 0 auto;
+}
+
+/* ── Product table ── */
+.container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.25rem;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.container th,
+.container td {
+  padding: 0.95rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.93rem;
+}
+
+.container th {
+  background: var(--primary-strong);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.container tbody tr {
+  transition: background 0.15s ease;
+}
+
+.container tbody tr:nth-child(even) {
+  background: var(--surface-alt);
+}
+
+.container tbody tr:hover {
+  background: var(--primary-light);
+}
+
+.container tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Form ── */
+.container form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.container form label {
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.container form label:first-of-type {
+  margin-top: 0;
+}
+
+.container form br {
+  display: none;
+}
+
+.container form input[type="text"],
+.container form input[type="number"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.container form input[type="text"]:focus,
+.container form input[type="number"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+.container form input[type="submit"],
+.container form input[type="reset"] {
+  margin-top: 2rem;
+  padding: 0.7rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  letter-spacing: 0.2px;
+  width: fit-content;
+  grid-column: auto;
+}
+
+.container form input[type="submit"] {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: #ffffff;
+  margin-right: 0;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.container form input[type="reset"] {
+  margin-top: 2rem;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+}
+
+/* ── Buttons row trick (no HTML change) ── */
+.container form {
+  grid-template-columns: 1fr 1fr;
+}
+
+.container form label,
+.container form input[type="text"],
+.container form input[type="number"] {
+  grid-column: 1 / -1;
+}
+
+.container form input[type="submit"] {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.container form input[type="reset"] {
+  grid-column: 2;
+  justify-self: start;
+}
+
+/* ── Footer ── */
+footer {
+  margin-top: auto;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+  padding: 1.5rem 1rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  letter-spacing: 0.1px;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  header {
+    padding: 2rem 1rem 1.75rem;
+  }
+
+  nav {
+    gap: 0.4rem;
+    padding: 0.75rem;
+  }
+
+  .container {
+    width: 96%;
+    margin: 1.5rem auto;
+    border-radius: var(--radius-sm);
+    padding: 1.25rem;
+  }
+
+  .container th,
+  .container td {
+    padding: 0.75rem 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .container form {
+    padding: 1.25rem;
+  }
+}
