@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Path, HTTPException, Query
-from schemas.book import Book, books
+from schemas.book import BookCreate, BookPublic, BookDB
 from typing import Annotated
 from schemas.review import Review
+from data.db import SessionDep
+from sqlmodel import select, delete
 
 
 books_router = APIRouter(prefix="/books", tags=["books"])
@@ -9,73 +11,90 @@ books_router = APIRouter(prefix="/books", tags=["books"])
 
 @books_router.get("/")
 def get_all_books(
-    sort: Annotated[bool, Query(description="Sort books by their review")] = False
-) -> list[Book]:
+    session: SessionDep,
+    sort: Annotated[bool, Query(description="Sort books by their review")] = False,
+) -> list[BookPublic]:
     """Returns the list ok available books."""
+    books = session.exec(select(BookDB)).all()
     if sort:
-        return sorted(books.values(), key=lambda book: book.review)
+        return sorted(books, key=lambda book: book.review)
     else:
-        return list(books.values())
+        return list(books)
 
 
 @books_router.get("/{id}")
 def get_book_by_id(
+    session: SessionDep,
     id: Annotated[int, Path(description="The ID of the book to retrieve")]
-) -> Book:
+) -> BookPublic:
     """Returns the book with the given id."""
-    try:
-        return books[id]
-    except KeyError:
+    book = session.get(BookDB, id)
+    if book:
+        return book
+    else:
         raise HTTPException(status_code=404, detail="Book not found")
 
 
 @books_router.post("/{id}/review")
 def add_review(
+    session: SessionDep,
     id: Annotated[int, Path(description="The ID of the book to retrieve")],
     review: Review
 ):
     """Add a review to the book with the given ID"""
-    try:
-        books[id].review = review.review
-        return "Review added successfully"
-    except KeyError:
+    book = session.get(BookDB, id)
+    if not book:
         raise HTTPException(status_code=404, detail="Book not found")
+    book.review = review.review
+    session.add(book)
+    session.commit()
+    return "Review added successfully"
 
 
 @books_router.post("/")
-def add_book(book: Book):
+def add_book(session: SessionDep, book: BookCreate):
     """Adds a new book."""
-    if book.id in books:
-        raise HTTPException(status_code=403, detail="Book already exists")
-    books[book.id] = book
+    book_entry = BookDB.model_validate(book)
+    session.add(book_entry)
+    session.commit()
     return "Book added successfully"
 
 
 @books_router.put("/{id}")
 def replace_book(
+    session: SessionDep,
     id: Annotated[int, Path(description="The ID of the book to replace")],
-    book: Book
+    new_book: BookCreate
 ):
     """Replaces the book with the given ID."""
-    if not id in books:
+    book = session.get(BookDB, id)
+    if not book:
         raise HTTPException(status_code=404, detail="Book not found")
-    books[id] = book
+    book.title = new_book.title
+    book.author = new_book.author
+    book.review = new_book.review
+    session.add(book)
+    session.commit()
     return "Book replaced successfully"
 
 
 @books_router.delete("/")
-def delete_all_books():
+def delete_all_books(session: SessionDep):
     """Deletes all the stored books."""
-    books.clear()
+    session.exec(delete(BookDB))
+    session.commit()
     return "All books deleted successfully"
 
 
 @books_router.delete("/{id}")
 def delete_book(
+    session: SessionDep,
     id: Annotated[int, Path(description="The ID of the book to delete")]
 ):
     """Deletes the book with the given ID."""
-    if not id in books:
+    book = session.get(BookDB, id)
+    if not book:
         raise HTTPException(status_code=404, detail="Book not found")
-    del books[id]
+    session.delete(book)
+    session.commit()
     return "Book deleted successfully"

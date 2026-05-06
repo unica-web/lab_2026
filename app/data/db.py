@@ -1,6 +1,7 @@
 from sqlmodel import create_engine, SQLModel, Session
 from typing import Annotated
 from fastapi import Depends
+from schemas.book import BookDB  # noqa
 
 
 sqlite_file_name = "/home/asotgiu/lab_2026/app/data/database.db"
