@@ -2,6 +2,8 @@ from sqlmodel import create_engine, SQLModel, Session
 from typing import Annotated
 from fastapi import Depends
 from schemas.book import BookDB  # noqa
+from faker import Faker
+import os
 
 
 sqlite_file_name = "/home/asotgiu/lab_2026/app/data/database.db"
@@ -14,7 +16,19 @@ engine = create_engine(
 
 
 def init_database():
+    ds_exists = os.path.isfile(sqlite_file_name)
     SQLModel.metadata.create_all(engine)
+    if not ds_exists:
+        f = Faker("it_IT")
+        with Session(engine) as session:
+            for i in range(10):
+                book = BookDB(
+                    title=f.sentence(nb_words=5),
+                    author=f.name(),
+                    review=f.pyint(1, 5)
+                )
+                session.add(book)
+            session.commit()
 
 
 def get_session():
