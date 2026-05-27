@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 from schemas.book import BookDB  # noqa
 from schemas.users import UserDB
+from schemas.book_user_link import BookUserLink
 from faker import Faker
 import os
 
@@ -27,7 +28,6 @@ def init_database():
                     title=f.sentence(nb_words=5),
                     author=f.name(),
                     review=f.pyint(1, 5),
-                    user_id=f.pyint(1, 10)
                 )
                 session.add(book)
             for i in range(10):
@@ -37,6 +37,13 @@ def init_database():
                     city=f.city()
                 )
                 session.add(user)
+            session.commit()
+            for i in range(5):
+                link = BookUserLink(
+                    book_id=f.pyint(1, 10),
+                    user_id=f.pyint(1, 10)
+                )
+                session.add(link)
             session.commit()
 
 

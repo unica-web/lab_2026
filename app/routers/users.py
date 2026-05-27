@@ -1,7 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from data.db import SessionDep
 from schemas.users import UserDB, UserPublic
 from schemas.book import BookPublic, BookDB
+from schemas.book_user_link import BookUserLink
 from sqlmodel import select
 
 
@@ -21,6 +22,11 @@ def get_user_books(
     session: SessionDep
 ) -> list[BookPublic]:
     """Returns all books held by the given user."""
-    statement = select(BookDB).join(UserDB).where(UserDB.id == id)
+    user = session.get(UserDB, id)
+    if not user:
+        raise HTTPException(404, detail="User not found.")
+    statement = select(BookDB).join(BookUserLink).where(
+        BookUserLink.user_id == id
+    )
     result = session.exec(statement).all()
     return result
