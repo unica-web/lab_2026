@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dettaglio Libro — Biblioteca{% endblock %}
+{% block content %}
+<a href="/ui/books" class="btn btn-secondary" style="margin-bottom:1rem;display:inline-block;">← Torna al catalogo</a>
+<div class="card" id="book-card">
+    <p class="loading">Caricamento…</p>
+</div>
+<div class="card">
+    <h2>👤 Utenti che hanno questo libro</h2>
+    <table>
+        <thead>
+            <tr><th>#</th><th>Nome</th><th>Città</th><th>Dettagli</th></tr>
+        </thead>
+        <tbody id="users-tbody">
+            <tr><td colspan="4" class="loading">Caricamento…</td></tr>
+        </tbody>
+    </table>
+</div>
+<script>
+
+</script>
+{% endblock %}

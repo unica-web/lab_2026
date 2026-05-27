@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Biblioteca Digitale{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a class="brand" href="/">📚 Biblioteca</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/ui/books">Libri</a>
+            <a href="/ui/users">Utenti</a>
+            <a href="/ui/books/add">+ Aggiungi Libro</a>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        &copy; 2026 Biblioteca Digitale &mdash; Progetto didattico FastAPI + Jinja2
+    </footer>
+</body>
+</html>

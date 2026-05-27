@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Path, HTTPException, Query
 from schemas.book import BookCreate, BookPublic, BookDB
+from schemas.users import UserPublic, UserDB
+from schemas.book_user_link import BookUserLink
 from typing import Annotated
 from schemas.review import Review
 from data.db import SessionDep
@@ -98,3 +100,14 @@ def delete_book(
     session.delete(book)
     session.commit()
     return "Book deleted successfully"
+
+
+@books_router.get("/{id}/users")
+def get_book_users(id: int, session: SessionDep) -> list[UserPublic]:
+    """Returns all users associated with the given book."""
+    book = session.get(BookDB, id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    statement = select(UserDB).join(BookUserLink).where(BookUserLink.book_id == id)
+    return list(session.exec(statement).all())
+

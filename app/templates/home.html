@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home — Biblioteca Digitale{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>📚 Biblioteca Digitale</h1>
+    <p>Benvenuto nel sistema di gestione della biblioteca. Sfoglia il catalogo, consulta gli utenti e gestisci i prestiti.</p>
+    <div class="hero-links">
+        <a href="/ui/books" class="btn btn-primary">Esplora i Libri</a>
+        <a href="/ui/users" class="btn btn-secondary">Lista Utenti</a>
+        <a href="/ui/books/add" class="btn" style="background:var(--color-accent);color:#2c1a0e;">+ Aggiungi Libro</a>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Come funziona</h2>
+    <p style="font-family:Arial,sans-serif;font-size:0.95rem;line-height:1.6;">
+        Questa applicazione è costruita con <strong>FastAPI</strong> (backend REST) e
+        <strong>Jinja2</strong> (template HTML). Le pagine usano <strong>JavaScript</strong>
+        per recuperare i dati dalle API tramite <em>fetch()</em> e manipolare il DOM.
+    </p>
+</div>
+
+{% endblock %}

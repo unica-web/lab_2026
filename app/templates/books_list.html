@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Lista Libri — Biblioteca{% endblock %}
+{% block content %}
+<h1 class="page-title">📖 Catalogo Libri</h1>
+<div style="margin-bottom:1rem;">
+    <label style="font-family:Arial,sans-serif;font-size:0.9rem;">
+        <input type="checkbox" id="sort-toggle">
+        Ordina per recensione
+    </label>
+</div>
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th><th>Titolo</th><th>Autore</th><th>Recensione</th><th>Dettagli</th>
+            </tr>
+        </thead>
+        <tbody id="books-tbody">
+            <tr><td colspan="5" class="loading">Caricamento in corso…</td></tr>
+        </tbody>
+    </table>
+</div>
+<a href="/ui/books/add" class="btn btn-primary">+ Aggiungi nuovo libro</a>
+<script>
+
+</script>
+{% endblock %}

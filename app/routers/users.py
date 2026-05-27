@@ -16,6 +16,26 @@ def get_all_users(session: SessionDep) -> list[UserPublic]:
     return users
 
 
+@users_router.get("/{id}")
+def get_user_by_id(id: int, session: SessionDep) -> UserPublic:
+    """Returns the user with the given ID."""
+    user = session.get(UserDB, id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+
+@users_router.delete("/{id}")
+def delete_user(id: int, session: SessionDep):
+    """Deletes the user with the given ID."""
+    user = session.get(UserDB, id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    session.delete(user)
+    session.commit()
+    return "User deleted successfully"
+
+
 @users_router.get("/{id}/books")
 def get_user_books(
     id: int,

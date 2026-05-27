@@ -1,0 +1,320 @@
+/* ============================================================
+   BIBLIOTECA DIGITALE — Foglio di stile principale
+   ============================================================ */
+
+/* ---------- Reset & variabili ---------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-bg:        #fdf6ee;
+    --color-surface:   #ffffff;
+    --color-primary:   #7b3f00;   /* marrone libri */
+    --color-primary-light: #a0522d;
+    --color-accent:    #d4a856;   /* oro */
+    --color-text:      #2c1a0e;
+    --color-muted:     #6b5040;
+    --color-border:    #ddd0c0;
+    --color-danger:    #c0392b;
+    --color-success:   #27ae60;
+    --radius:          6px;
+    --shadow:          0 2px 8px rgba(0,0,0,0.12);
+    --transition:      0.2s ease;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    box-shadow: var(--shadow);
+}
+
+.navbar .brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.navbar nav a {
+    color: #f0e6d3;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+    transition: color var(--transition);
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar nav a:hover {
+    color: var(--color-accent);
+}
+
+/* ---------- Layout principale ---------- */
+.container {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+}
+
+/* ---------- Titoli di pagina ---------- */
+.page-title {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- Card ---------- */
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+/* ---------- Tabelle ---------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+}
+
+thead th {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition);
+}
+
+tbody tr:hover {
+    background-color: #fdf0e0;
+}
+
+tbody td {
+    padding: 0.55rem 0.8rem;
+}
+
+/* ---------- Link nella tabella ---------- */
+.link-detail {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-detail:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Stelle recensione ---------- */
+.stars {
+    color: var(--color-accent);
+    font-size: 1rem;
+}
+
+/* ---------- Bottoni ---------- */
+.btn {
+    display: inline-block;
+    padding: 0.45rem 1.1rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    transition: opacity var(--transition), background var(--transition);
+    text-decoration: none;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: var(--color-muted);
+    color: #fff;
+}
+
+/* ---------- Form ---------- */
+.form-group {
+    margin-bottom: 1.1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    background: #fffdf9;
+    transition: border var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary-light);
+}
+
+/* ---------- Messaggi notifica ---------- */
+.notification {
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: none;  /* mostrato via JS */
+}
+
+.notification.success {
+    background: #eafaf1;
+    border: 1px solid var(--color-success);
+    color: var(--color-success);
+}
+
+.notification.error {
+    background: #fdedec;
+    border: 1px solid var(--color-danger);
+    color: var(--color-danger);
+}
+
+/* ---------- Sezione hero (home) ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    color: #fff;
+    padding: 3rem 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-accent);
+}
+
+.hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+}
+
+.hero-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ---------- Griglia info (hero card) ---------- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.info-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.info-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.info-card h3 {
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+/* ---------- Detail attributes ---------- */
+.detail-attrs {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0.5rem 1rem;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.detail-attrs .label {
+    color: var(--color-muted);
+    font-weight: bold;
+}
+
+/* ---------- Loading spinner ---------- */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-muted);
+    font-family: 'Arial', sans-serif;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    background-color: var(--color-primary);
+    color: #f0e6d3;
+    text-align: center;
+    padding: 0.9rem;
+    font-size: 0.8rem;
+    font-family: 'Arial', sans-serif;
+    margin-top: auto;
+}
+

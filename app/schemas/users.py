@@ -13,4 +13,4 @@ class UserDB(BaseUser, table=True):
 
 
 class UserPublic(BaseUser):
-    pass
+    id: int

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Aggiungi Libro — Biblioteca{% endblock %}
+{% block content %}
+<h1 class="page-title">+ Aggiungi un nuovo libro</h1>
+<div class="card" style="max-width:500px;">
+    <form id="add-book-form">
+        <div class="form-group">
+            <label for="title">Titolo *</label>
+            <input type="text" id="title" placeholder="Es. Il nome della rosa" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Autore *</label>
+            <input type="text" id="author" placeholder="Es. Umberto Eco" required>
+        </div>
+        <div class="form-group">
+            <label for="review">Recensione (1–5 stelle)</label>
+            <select id="review">
+                <option value="">— nessuna —</option>
+                <option value="1">1 ★</option>
+                <option value="2">2 ★★</option>
+                <option value="3">3 ★★★</option>
+                <option value="4">4 ★★★★</option>
+                <option value="5">5 ★★★★★</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Aggiungi libro</button>
+        <a href="/ui/books" class="btn btn-secondary" style="margin-left:0.5rem;">Annulla</a>
+    </form>
+</div>
+<script>
+
+</script>
+{% endblock %}
