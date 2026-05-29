@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dettaglio Utente — Biblioteca{% endblock %}
+{% block content %}
+<a href="/ui/users" class="btn btn-secondary" style="margin-bottom:1rem;display:inline-block;">← Torna alla lista</a>
+<div class="card" id="user-card">
+    <p class="loading">Caricamento…</p>
+</div>
+<div class="card">
+    <h2>📚 Libri presi in prestito</h2>
+    <table>
+        <thead>
+            <tr><th>#</th><th>Titolo</th><th>Autore</th><th>Recensione</th><th>Dettagli</th></tr>
+        </thead>
+        <tbody id="books-tbody">
+            <tr><td colspan="5" class="loading">Caricamento…</td></tr>
+        </tbody>
+    </table>
+</div>
+<script>
+
+</script>
+{% endblock %}
